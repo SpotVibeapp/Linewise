@@ -2,7 +2,7 @@
 apk: build/app/outputs/flutter-apk/app-release.apk
 
 --- sha256 ---
-sha256: 72d03ca00339e52ce07d97f96b1c28483c573cfbfefbfca8609be3b75184efb9
+sha256: 9539b77183a1235af092da5d75b57877eb313372a5291ab57500c34e5c25eb6d
 
 --- aapt badging (package + version) ---
 package: name='app.linewise.linewise' versionCode='12' versionName='1.11.0' platformBuildVersionName='14' platformBuildVersionCode='34' compileSdkVersion='34' compileSdkVersionCodename='14'
@@ -17,9 +17,9 @@ zipalign OK
 
 --- apksigner verify ---
 V2 Signer: certificate DN: CN=Linewise Release, OU=Mobile, O=Linewise, L=NA, ST=NA, C=US
-V2 Signer: certificate SHA-256 digest: e87f6f3ff86e8ab33f3b938caf767d72fcaf108b40c3306d222bd61e58d63a55
-V2 Signer: certificate SHA-1 digest: c5261e3c777c93f14de787b0a94617145032c196
-V2 Signer: certificate MD5 digest: 59ea4f727f403757b655145bebc39635
+V2 Signer: certificate SHA-256 digest: 92b279fc05a91dda236a850c3ee06cc46cfffcd9358d2c13dfb919f8403f1a3a
+V2 Signer: certificate SHA-1 digest: 4bb3d321a2b858f691fc74e991e6e40cf195d948
+V2 Signer: certificate MD5 digest: 80aa41a60aaa02a04729009b1092e6e3
 WARNING: META-INF/com/android/build/gradle/app-metadata.properties not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.
 WARNING: META-INF/androidx.activity_activity-ktx.version not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.
 WARNING: META-INF/androidx.activity_activity.version not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.
@@ -78,7 +78,7 @@ WARNING: META-INF/kotlinx_coroutines_android.version not protected by signature.
 WARNING: META-INF/kotlinx_coroutines_core.version not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.
 WARNING: META-INF/services/kotlinx.coroutines.CoroutineExceptionHandler not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.
 WARNING: META-INF/services/kotlinx.coroutines.internal.MainDispatcherFactory not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.
-signer cert SHA-256: e87f6f3ff86e8ab33f3b938caf767d72fcaf108b40c3306d222bd61e58d63a55
+signer cert SHA-256: 92b279fc05a91dda236a850c3ee06cc46cfffcd9358d2c13dfb919f8403f1a3a
 
 --- build-info.json ---
 {
@@ -86,12 +86,12 @@ signer cert SHA-256: e87f6f3ff86e8ab33f3b938caf767d72fcaf108b40c3306d222bd61e58d
   "package": "app.linewise.linewise",
   "versionName": "1.11.0",
   "versionCode": "12",
-  "apkSha256": "72d03ca00339e52ce07d97f96b1c28483c573cfbfefbfca8609be3b75184efb9",
-  "signerCertSha256": "e87f6f3ff86e8ab33f3b938caf767d72fcaf108b40c3306d222bd61e58d63a55",
+  "apkSha256": "9539b77183a1235af092da5d75b57877eb313372a5291ab57500c34e5c25eb6d",
+  "signerCertSha256": "92b279fc05a91dda236a850c3ee06cc46cfffcd9358d2c13dfb919f8403f1a3a",
   "zipalign": "4-byte OK",
   "signature": "apksigner verify OK",
   "signingMode": "ephemeral",
-  "builtAt": "2026-09-24T22:23:43Z"
+  "builtAt": "2026-09-24T23:31:17Z"
 }
 
 ALL CHECKS PASSED: package, version, signature, zip alignment, SHA-256.
