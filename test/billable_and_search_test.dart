@@ -14,7 +14,7 @@ import 'package:linewise/domain/sports.dart';
 
 const String kFakeKey = 'TESTKEY123456789abcdef';
 
-http.Response espnSearch(_) => http.Response(
+Future<http.Response> espnSearch(_) async => http.Response(
     jsonEncode({
       'sports': [
         {
@@ -39,7 +39,7 @@ http.Response espnSearch(_) => http.Response(
     }),
     200);
 
-http.Response espnGamelog(_) => http.Response(
+Future<http.Response> espnGamelog(_) async => http.Response(
     jsonEncode({
       'seasonTypes': [
         {
@@ -61,7 +61,7 @@ http.Response espnGamelog(_) => http.Response(
     }),
     200);
 
-http.Response oddsBody(_) => http.Response(
+Future<http.Response> oddsBody(_) async => http.Response(
         jsonEncode([
           {
             'id': 'ev1',

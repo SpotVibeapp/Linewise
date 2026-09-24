@@ -59,8 +59,7 @@ class EspnClient {
       if (node is! Map) return;
       final type = node['type']?.toString() ?? '';
       final direct = node['athlete'];
-      final Map? payload = direct is Map ? direct : node;
-      if (payload == null) return;
+      final Map payload = direct is Map ? direct : node;
       final id = payload['id']?.toString();
       final name =
           payload['displayName']?.toString() ?? payload['name']?.toString();

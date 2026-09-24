@@ -9,7 +9,7 @@ import 'factor_groups.dart';
 
 /// Context facts about the upcoming game, all source-tagged when present.
 class GameContext {
-  GameContext({
+  const GameContext({
     this.gameDescription,
     this.isHome,
     this.restDays,
@@ -69,9 +69,11 @@ class ProbabilityEngine {
     required PropDirection direction,
     required SubjectHistory history,
     required ExactLine? line,
+    ExactLine? originalLine,
     List<Factor> extraFactors = const [],
     GameContext context = const GameContext(),
   }) {
+    final bool isMoneyline = market == MarketType.moneyline;
     final now = clock.now();
     final values = history.validValuesByStat()[statKey] ?? const <double>[];
     final n = values.length;

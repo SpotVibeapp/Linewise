@@ -6,6 +6,7 @@ import 'core/canonical_json.dart';
 import 'data/calibration_repository.dart';
 import 'data/line_repository.dart';
 import 'domain/models/pick.dart';
+import 'data/snapshot_repository.dart';
 import 'domain/models/snapshot.dart';
 
 /// In-memory model + wiring for the UI layer.

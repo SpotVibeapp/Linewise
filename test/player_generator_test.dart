@@ -17,7 +17,7 @@ SubjectHistory historyWith({
   for (var i = 0; i < rushYds; i++) {
     obs.add(StatObservation(
         statKey: 'rush_yds',
-        value: rushBase + i,
+        value: (rushBase + i).toDouble(),
         gameDate: DateTime.utc(2026, 9, 1).add(Duration(days: i)),
         source: 'ESPN gamelog'));
   }
@@ -99,8 +99,8 @@ void main() {
     final e = higher.estimate!;
     expect(e.sampleSize, 24);
     expect(e.winPct + e.pushPct + e.losePct, closeTo(100, 1e-9));
-    expect(
-        kWinPctDefinition, contains('not a guarantee') | contains('estimate'));
+    expect(kWinPctDefinition,
+        anyOf(contains('not a guarantee'), contains('estimate')));
     // Every contract field present.
     expect(higher.line!.source, isNotEmpty);
     expect(higher.line!.sourceTimestamp, isNotNull);

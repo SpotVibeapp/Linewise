@@ -67,7 +67,7 @@ void main() {
     expect(csv, contains('noSourceBackedLine'));
     expect(csv, contains('win_pct_definition'));
     // Withheld rec_yds rows present.
-    expect(csv, contains('Reception') | contains('rec_yds'));
+    expect(csv, anyOf(contains('Reception'), contains('rec_yds')));
     final rows = csv.split('\n');
     expect(rows.length, picks.length + 1); // header + every row incl withheld
   });
@@ -75,7 +75,8 @@ void main() {
   test('JSON export includes withheld rows and the definition', () {
     final json = export.toJson(bundle);
     expect(json, contains('"includes_withheld_rows":true'));
-    expect(json, contains('Probability unavailable') | contains('withheld'));
+    expect(
+        json, anyOf(contains('Probability unavailable'), contains('withheld')));
     expect(json, contains('Win percentage = share'));
   });
 

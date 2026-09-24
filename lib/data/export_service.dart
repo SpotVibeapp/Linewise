@@ -160,5 +160,5 @@ class PredictionSnapshotRowBundle {
 
   /// Integrity fingerprint of the export itself.
   String get exportFingerprint =>
-      sha256.convert(utf8.encode('${snapshotId}:${picks.length}')).toString();
+      sha256.convert(utf8.encode('$snapshotId:${picks.length}')).toString();
 }

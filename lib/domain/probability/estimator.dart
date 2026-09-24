@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import '../models/exact_line.dart';
 import '../models/pick.dart';
 
 /// Minimum valid observations before any probability may be published.

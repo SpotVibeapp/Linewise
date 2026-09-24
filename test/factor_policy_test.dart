@@ -29,7 +29,6 @@ void main() {
     });
 
     test('descriptive-only factors can never adjust', () {
-      final guard = DoubleCountGuard();
       expect(
         () =>
             f('role.recent_form', FactorGroup.roleUsage, 3, descriptive: true),

@@ -21,7 +21,7 @@ class PickDetailPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Text('${pick.subjectName}',
+          Text(pick.subjectName,
               style:
                   const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           if (pick.gameDescription != null)

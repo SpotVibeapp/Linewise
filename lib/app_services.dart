@@ -115,7 +115,7 @@ class AppServices {
       log: log,
       clock: clock,
     );
-    loader = ProviderLineLoader(client: odds);
+    loader = ProviderLineLoader(client: odds, costModel: const OddsCostModel());
     lines = LineRepository(storageDir: Directory('${storage.path}/lines'));
     snapshots =
         SnapshotRepository(storageDir: Directory('${storage.path}/snapshots'));
@@ -141,8 +141,8 @@ class AppServices {
   final AppLog log;
   final SettingsRepository settings;
   final CallbackUserApproval approval;
-  final ExportService exportService;
-  final ImportService importService;
+  late final ExportService exportService;
+  late final ImportService importService;
 
   late final BillableGate gate;
   late final EspnClient espn;

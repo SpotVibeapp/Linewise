@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../app_services.dart';
+import 'app.dart';
 import '../data/billing/cost_model.dart';
+import '../data/odds_api_client.dart';
 import '../domain/models/exact_line.dart';
 import '../domain/models/pick.dart';
 import '../domain/models/slate_date.dart';
@@ -33,7 +35,6 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
   bool _busy = false;
   String? _status;
   dynamic _result; // PlayerSearchResult?
-  dynamic _history; // SubjectHistory?
   List<dynamic> _generated = const [];
   List<dynamic> _providerEvents = const [];
   String? _selectedEventId;
@@ -89,8 +90,7 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
         _history = history;
         _generated = generated;
         services.model.setLastGenerated(generated.cast<PickCandidate>());
-        final withLine =
-            generated.where((p) => (p as PickCandidate).line != null).length;
+        final withLine = generated.where((p) => p.line != null).length;
         _status = 'History: ${history.observations.length} observation rows. '
             '${generated.length} Higher/Lower candidate rows generated '
             '($withLine with an exact line). Everything above was free — '

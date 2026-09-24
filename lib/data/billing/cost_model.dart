@@ -54,9 +54,8 @@ class CreditCostEstimate {
       ..writeln('Request class: ${kind.label}')
       ..writeln('Cost class: ${kind.costClassLabel}');
     if (kind == RequestKind.exactProviderLines) {
-      b
-        ..writeln('Estimate: $marketsCount market(s) × $regionsCount region(s) '
-            '× ${historical ? '10 (historical)' : '1'} = $credits credit(s).');
+      b.writeln('Estimate: $marketsCount market(s) × $regionsCount region(s) '
+          '× ${historical ? '10 (historical)' : '1'} = $credits credit(s).');
     } else if (kind == RequestKind.marketDiscovery) {
       b.writeln('Estimated cost: 0 credits (sports/events listings are free).');
     } else {
