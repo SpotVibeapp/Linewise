@@ -62,8 +62,7 @@ class CreditCostEstimate {
       b.writeln('Estimated cost: 0 credits.');
     }
     if (isBillable) {
-      b.writeln(
-          'WARNING: a request can consume credits even when it returns zero lines.');
+      b.writeln('WARNING: $zeroResultWarning');
     }
     return b.toString().trim();
   }
