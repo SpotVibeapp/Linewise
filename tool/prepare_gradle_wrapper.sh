@@ -30,15 +30,21 @@ else
   push_diag "$FORMAT_DIAG" "dart format"
 fi
 
-# Capture `flutter analyze` output into the repo so analyzer findings stay
-# visible even when workflow logs cannot be downloaded. The workflow's own
-# analyze step remains the pass/fail gate; this only publishes evidence.
+# Capture `flutter analyze` and `flutter test` output into the repo so findings
+# stay visible even when workflow logs cannot be downloaded. The workflow's own
+# steps remain the pass/fail gates; this only publishes evidence.
 if flutter pub get >/dev/null 2>&1; then
   ANALYZE_DIAG=ci/last-analyze-diag.txt
   if flutter analyze >"$ANALYZE_DIAG" 2>&1; then
     rm -f "$ANALYZE_DIAG"
   else
     push_diag "$ANALYZE_DIAG" "flutter analyze"
+  fi
+  TEST_DIAG=ci/last-test-diag.txt
+  if flutter test >"$TEST_DIAG" 2>&1; then
+    rm -f "$TEST_DIAG"
+  else
+    push_diag "$TEST_DIAG" "flutter test"
   fi
 fi
 
