@@ -4,10 +4,14 @@
 /// line and error message is scrubbed here before it can be stored anywhere.
 library;
 
-final RegExp _apiKeyParam = RegExp(r'(apiKey=)[^&\s"\'\\]+', caseSensitive: false);
+// Quote characters appear as regex escapes (\x22 = ", \x27 = ') because a Dart
+// raw string cannot contain its own quote character.
+final RegExp _apiKeyParam =
+    RegExp(r'(apiKey=)[^&\s\x22\x27\\]+', caseSensitive: false);
 final RegExp _bearer = RegExp(r'(Bearer\s+)[A-Za-z0-9._\-]+', caseSensitive: false);
 final RegExp _keyLabel = RegExp(
-  r'((?:api[_-]?key|access[_-]?token|secret|password)["\s:=]+)[^\s"\',;]+',
+  r'((?:api[_-]?key|access[_-]?token|secret|password)[\x22\s:=]+)'
+  r"(?:\x27[^\x27]*\x27|\x22[^\x22]*\x22|[^\s\x22\x27,;]+)",
   caseSensitive: false,
 );
 
