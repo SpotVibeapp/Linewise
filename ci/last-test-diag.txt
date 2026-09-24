@@ -1,0 +1,76 @@
+
+✅ /home/runner/work/Linewise/Linewise/test/cost_model_test.dart: odds cost = markets × regions (provider documented)
+✅ /home/runner/work/Linewise/Linewise/test/cost_model_test.dart: historical odds cost 10×
+✅ /home/runner/work/Linewise/Linewise/test/cost_model_test.dart: discovery is 0 credits but still labeled provider
+::group::❌ /home/runner/work/Linewise/Linewise/test/cost_model_test.dart: billable estimates include the zero-line warning (failed)
+Expected: contains 'A request can consume credits even when it returns zero lines.'
+  Actual: 'Request class: Exact provider-line loading\n'
+            'Cost class: The Odds API odds — BILLABLE\n'
+            'Estimate: 2 market(s) × 1 region(s) × 1 = 2 credit(s).\n'
+            'WARNING: a request can consume credits even when it returns zero lines.'
+   Which: does not contain 'A request can consume credits even when it returns zero lines.'
+
+package:matcher                                     expect
+package:flutter_test/src/widget_tester.dart 480:18  expect
+test/cost_model_test.dart 42:5                      main.<fn>
+::endgroup::
+✅ /home/runner/work/Linewise/Linewise/test/cost_model_test.dart: all four request classes are distinguished
+✅ /home/runner/work/Linewise/Linewise/test/billable_and_search_test.dart: KNOWN PROBLEM FIX: searching "Derrick Henry" with zero loaded lines is free, returns selections, and never touches the billable client
+✅ /home/runner/work/Linewise/Linewise/test/billable_and_search_test.dart: loaded-line filtering matches local cache without any network
+✅ /home/runner/work/Linewise/Linewise/test/billable_and_search_test.dart: safe mode blocks provider requests entirely
+✅ /home/runner/work/Linewise/Linewise/test/billable_and_search_test.dart: declining the cost preview sends nothing
+✅ /home/runner/work/Linewise/Linewise/test/billable_and_search_test.dart: approved billable load works, keeps exact lines, redacts logs
+::group::❌ /home/runner/work/Linewise/Linewise/test/billable_and_search_test.dart: cost preview shows the math and the zero-line warning (failed)
+Expected: contains 'A request can consume credits even when it returns zero lines.'
+  Actual: 'Request class: Exact provider-line loading\n'
+            'Cost class: The Odds API odds — BILLABLE\n'
+            'Estimate: 2 market(s) × 1 region(s) × 1 = 2 credit(s).\n'
+            'WARNING: a request can consume credits even when it returns zero lines.'
+   Which: does not contain 'A request can consume credits even when it returns zero lines.'
+
+package:matcher                                     expect
+package:flutter_test/src/widget_tester.dart 480:18  expect
+test/billable_and_search_test.dart 261:5            main.<fn>
+::endgroup::
+✅ /home/runner/work/Linewise/Linewise/test/export_test.dart: CSV export includes withheld rows with reasons
+✅ /home/runner/work/Linewise/Linewise/test/export_test.dart: JSON export includes withheld rows and the definition
+✅ /home/runner/work/Linewise/Linewise/test/export_test.dart: exports never contain credentials
+✅ /home/runner/work/Linewise/Linewise/test/player_generator_test.dart: Higher and Lower candidates for every statistic in history
+✅ /home/runner/work/Linewise/Linewise/test/player_generator_test.dart: defensible with exact line and n>=20 — shows the full contract
+✅ /home/runner/work/Linewise/Linewise/test/player_generator_test.dart: without a source-backed line rows are withheld — never invented
+✅ /home/runner/work/Linewise/Linewise/test/player_generator_test.dart: n<20 is withheld with insufficient observations
+✅ /home/runner/work/Linewise/Linewise/test/player_generator_test.dart: stale line is disclosed as unknown/stale, not silently used
+✅ /home/runner/work/Linewise/Linewise/test/player_generator_test.dart: exact line values are preserved verbatim
+✅ /home/runner/work/Linewise/Linewise/test/calibration_test.dart: outcomes are manual-only and the report is computed from them
+✅ /home/runner/work/Linewise/Linewise/test/calibration_test.dart: calibration never auto-settles: no outcome means no score
+✅ /home/runner/work/Linewise/Linewise/test/estimator_test.dart: EmpiricalEstimator refuses to invent probabilities below 20 valid observations
+✅ /home/runner/work/Linewise/Linewise/test/estimator_test.dart: EmpiricalEstimator computes win/push/tie/lower shares from raw observations only
+✅ /home/runner/work/Linewise/Linewise/test/estimator_test.dart: EmpiricalEstimator 90% Wilson interval brackets the empirical share
+✅ /home/runner/work/Linewise/Linewise/test/estimator_test.dart: EmpiricalEstimator adjustment is clamped and never eats the push mass
+✅ /home/runner/work/Linewise/Linewise/test/estimator_test.dart: EmpiricalEstimator moneyline variant reports push/tie as 0 (not applicable)
+✅ /home/runner/work/Linewise/Linewise/test/team_generator_test.dart: moneyline is defensible with source-backed side and n>=20
+✅ /home/runner/work/Linewise/Linewise/test/team_generator_test.dart: spread with an exact line: covers vs fails, pushes on exact ties
+✅ /home/runner/work/Linewise/Linewise/test/team_generator_test.dart: totals: over/under with push on exact ties
+✅ /home/runner/work/Linewise/Linewise/test/team_generator_test.dart: without lines every team market is withheld — no invented lines
+✅ /home/runner/work/Linewise/Linewise/test/factor_policy_test.dart: Double-count guard rejects the same signal id twice (no double-counting)
+✅ /home/runner/work/Linewise/Linewise/test/factor_policy_test.dart: Double-count guard descriptive-only factors can never adjust
+✅ /home/runner/work/Linewise/Linewise/test/factor_policy_test.dart: Adjustment policy caps per-group cap clamps the group total
+✅ /home/runner/work/Linewise/Linewise/test/factor_policy_test.dart: Adjustment policy caps overall cap clamps the grand total
+✅ /home/runner/work/Linewise/Linewise/test/factor_policy_test.dart: Adjustment policy caps baseline and marketHistory groups must not adjust
+✅ /home/runner/work/Linewise/Linewise/test/factor_policy_test.dart: Evidence quality rubric high quality for large fresh sample with corroboration
+✅ /home/runner/work/Linewise/Linewise/test/factor_policy_test.dart: Evidence quality rubric low quality when line is missing/old and unknowns stack up
+✅ /home/runner/work/Linewise/Linewise/test/snapshot_test.dart: snapshots are immutable: same id cannot be overwritten
+✅ /home/runner/work/Linewise/Linewise/test/snapshot_test.dart: content hash verifies intact snapshots and detects tampering
+✅ /home/runner/work/Linewise/Linewise/test/snapshot_test.dart: identical payloads hash identically; changed payloads differ
+✅ /home/runner/work/Linewise/Linewise/test/slate_date_test.dart: SlateDate parses strict YYYY-MM-DD only
+✅ /home/runner/work/Linewise/Linewise/test/slate_date_test.dart: SlateDate exact slate-date filtering is equality — never ranges
+✅ /home/runner/work/Linewise/Linewise/test/slate_date_test.dart: SlateDate derives slate date from UTC kickoff with fixed disclosed offset
+✅ /home/runner/work/Linewise/Linewise/test/redaction_test.dart: apiKey query values are redacted
+✅ /home/runner/work/Linewise/Linewise/test/redaction_test.dart: bearer tokens and labeled secrets are redacted
+✅ /home/runner/work/Linewise/Linewise/test/redaction_test.dart: looksSecret detects leftover credentials
+✅ /home/runner/work/Linewise/Linewise/test/redaction_test.dart: error objects are scrubbed before logging
+✅ /home/runner/work/Linewise/Linewise/test/import_test.dart: imports CSV rows with required provenance
+✅ /home/runner/work/Linewise/Linewise/test/import_test.dart: imports JSON rows and skips malformed ones with explanations
+✅ /home/runner/work/Linewise/Linewise/test/import_test.dart: never invents a line without player, stat and value
+
+::error::49 tests passed, 2 failed.
