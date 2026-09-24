@@ -7,7 +7,6 @@ import '../core/logger.dart';
 import '../core/redaction.dart';
 import '../domain/generation/player_generator.dart' show statDisplayName;
 import '../domain/models/exact_line.dart';
-import '../domain/sports.dart';
 import 'billing/billable_gate.dart';
 import 'billing/cost_model.dart';
 import 'key_store.dart';

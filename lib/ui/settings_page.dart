@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../app_model.dart';
 import '../app_services.dart';
 import '../data/billing/cost_model.dart';
 import 'widgets.dart';
