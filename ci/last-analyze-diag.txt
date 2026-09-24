@@ -1,0 +1,64 @@
+Analyzing Linewise...                                           
+
+  error • Undefined class 'SnapshotRepository' • lib/app_model.dart:23:9 • undefined_class
+  error • All final variables must be initialized, but 'exportService' and 'importService' aren't • lib/app_services.dart:93:3 • final_not_initialized_constructor
+  error • The named parameter 'costModel' is required, but there's no corresponding argument • lib/app_services.dart:118:14 • missing_required_argument
+  error • 'exportService' can't be used as a setter because it's final • lib/app_services.dart:133:5 • assignment_to_final
+  error • 'importService' can't be used as a setter because it's final • lib/app_services.dart:134:5 • assignment_to_final
+   info • Unnecessary cascade expression • lib/data/billing/cost_model.dart:57:7 • avoid_single_cascade_in_expression_statements
+   info • Type could be non-nullable • lib/data/espn_client.dart:62:18 • unnecessary_nullable_for_final_variable_declarations
+   info • Unnecessary braces in a string interpolation • lib/data/export_service.dart:163:35 • unnecessary_brace_in_string_interps
+  error • The constructor being called isn't a const constructor • lib/domain/generation/player_generator.dart:61:27 • const_with_non_const
+  error • The default value of an optional parameter must be constant • lib/domain/generation/player_generator.dart:61:27 • non_constant_default_value
+  error • The constructor being called isn't a const constructor • lib/domain/generation/team_generator.dart:36:27 • const_with_non_const
+  error • The default value of an optional parameter must be constant • lib/domain/generation/team_generator.dart:36:27 • non_constant_default_value
+  error • The named parameter 'originalLine' isn't defined • lib/domain/generation/team_generator.dart:176:7 • undefined_named_parameter
+  error • The constructor being called isn't a const constructor • lib/domain/probability/engine.dart:73:27 • const_with_non_const
+  error • The default value of an optional parameter must be constant • lib/domain/probability/engine.dart:73:27 • non_constant_default_value
+  error • Undefined name 'isMoneyline' • lib/domain/probability/engine.dart:149:36 • undefined_identifier
+  error • Undefined name 'originalLine' • lib/domain/probability/engine.dart:161:15 • undefined_identifier
+  error • Undefined name 'isMoneyline' • lib/domain/probability/engine.dart:194:9 • undefined_identifier
+  error • Undefined name 'originalLine' • lib/domain/probability/engine.dart:219:15 • undefined_identifier
+  error • Undefined name 'originalLine' • lib/domain/probability/engine.dart:252:13 • undefined_identifier
+  error • Undefined name 'isMoneyline' • lib/domain/probability/engine.dart:261:18 • undefined_identifier
+  error • Undefined class 'PropDirection' • lib/domain/probability/estimator.dart:23:14 • undefined_class
+  error • Undefined name 'PropDirection' • lib/domain/probability/estimator.dart:35:32 • undefined_identifier
+  error • Undefined name 'PropDirection' • lib/domain/probability/estimator.dart:36:25 • undefined_identifier
+  error • Undefined class 'PropDirection' • lib/domain/probability/estimator.dart:75:14 • undefined_class
+  error • Undefined name 'PropDirection' • lib/domain/probability/estimator.dart:80:31 • undefined_identifier
+  error • Undefined name 'AppScope' • lib/ui/calibration_page.dart:30:31 • undefined_identifier
+  error • Undefined name 'AppScope' • lib/ui/manual_entry_page.dart:26:31 • undefined_identifier
+   info • Unnecessary use of string interpolation • lib/ui/pick_detail_page.dart:24:16 • unnecessary_string_interpolations
+  error • Undefined name 'AppScope' • lib/ui/picks_page.dart:19:31 • undefined_identifier
+  error • Undefined name 'kGeneratorVersion' • lib/ui/picks_page.dart:73:41 • undefined_identifier
+warning • The value of the field '_history' isn't used • lib/ui/player_search_page.dart:36:11 • unused_field
+  error • Undefined name 'AppScope' • lib/ui/player_search_page.dart:42:31 • undefined_identifier
+   info • Unnecessary cast • lib/ui/player_search_page.dart:93:37 • unnecessary_cast
+  error • The method 'RequestKindBadge' isn't defined for the type '_PlayerSearchPageState' • lib/ui/player_search_page.dart:167:11 • undefined_method
+  error • The method 'RequestKindBadge' isn't defined for the type '_PlayerSearchPageState' • lib/ui/player_search_page.dart:168:11 • undefined_method
+  error • The method 'RequestKindBadge' isn't defined for the type '_PlayerSearchPageState' • lib/ui/player_search_page.dart:169:11 • undefined_method
+  error • The method 'RequestKindBadge' isn't defined for the type '_PlayerSearchPageState' • lib/ui/player_search_page.dart:170:11 • undefined_method
+  error • Undefined name 'kPlayerPropMarketsBySport' • lib/ui/player_search_page.dart:338:35 • undefined_identifier
+  error • Undefined name 'AppScope' • lib/ui/settings_page.dart:24:31 • undefined_identifier
+  error • The method 'RequestKindBadge' isn't defined for the type '_SettingsPageState' • lib/ui/settings_page.dart:139:25 • undefined_method
+  error • Undefined name 'kAppVersion' • lib/ui/settings_page.dart:213:33 • undefined_identifier
+  error • Undefined name 'kVersionCode' • lib/ui/settings_page.dart:213:59 • undefined_identifier
+  error • Undefined name 'AppScope' • lib/ui/slates_page.dart:25:31 • undefined_identifier
+  error • The method 'RequestKindBadge' isn't defined for the type '_SlatesPageState' • lib/ui/slates_page.dart:60:11 • undefined_method
+  error • Undefined name 'AppScope' • lib/ui/snapshots_page.dart:25:31 • undefined_identifier
+  error • The method 'RequestKindBadge' isn't defined for the type 'SectionHeader' • lib/ui/widgets.dart:116:31 • undefined_method
+  error • The returned type 'Response' isn't returnable from a 'Future<Response>' function, as required by the closure's context • test/billable_and_search_test.dart:121:16 • return_of_invalid_type_from_closure
+  error • The returned type 'Response' isn't returnable from a 'Future<Response>' function, as required by the closure's context • test/billable_and_search_test.dart:123:56 • return_of_invalid_type_from_closure
+  error • The returned type 'Response' isn't returnable from a 'Future<Response>' function, as required by the closure's context • test/billable_and_search_test.dart:124:14 • return_of_invalid_type_from_closure
+  error • The returned type 'Response' isn't returnable from a 'Future<Response>' function, as required by the closure's context • test/billable_and_search_test.dart:167:14 • return_of_invalid_type_from_closure
+  error • The returned type 'Response' isn't returnable from a 'Future<Response>' function, as required by the closure's context • test/billable_and_search_test.dart:187:14 • return_of_invalid_type_from_closure
+  error • The returned type 'Response' isn't returnable from a 'Future<Response>' function, as required by the closure's context • test/billable_and_search_test.dart:208:14 • return_of_invalid_type_from_closure
+  error • The returned type 'Response' isn't returnable from a 'Future<Response>' function, as required by the closure's context • test/billable_and_search_test.dart:230:14 • return_of_invalid_type_from_closure
+  error • The argument type 'Response Function(dynamic)' can't be assigned to the parameter type 'MockClientHandler'.  • test/billable_and_search_test.dart:254:46 • argument_type_not_assignable
+  error • The operator '|' isn't defined for the type 'Matcher' • test/export_test.dart:70:39 • undefined_operator
+  error • The operator '|' isn't defined for the type 'Matcher' • test/export_test.dart:78:54 • undefined_operator
+warning • The value of the local variable 'guard' isn't used • test/factor_policy_test.dart:32:13 • unused_local_variable
+  error • The argument type 'int' can't be assigned to the parameter type 'double'.  • test/player_generator_test.dart:27:16 • argument_type_not_assignable
+  error • The operator '|' isn't defined for the type 'Matcher' • test/player_generator_test.dart:103:56 • undefined_operator
+
+60 issues found. (ran in 10.4s)
