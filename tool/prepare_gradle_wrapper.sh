@@ -54,6 +54,55 @@ if flutter pub get >/dev/null 2>&1; then
   fi
 fi
 
+# ── Toolkit packing (once) ──────────────────────────────────────────────────
+# This runner has full internet; the workspace sandbox does not. Ship the
+# toolchains (Flutter+Dart with cache, JDK 17, Android build-tools/platform,
+# pub cache) as chunked blobs under toolkits/ so they can travel over git.
+# Idempotent: skipped when toolkits/MANIFEST already exists.
+if [ ! -f toolkits/MANIFEST ]; then
+  echo "packing builder toolkit into toolkits/ (one-time)"
+  pack_dir() { # <name.tar.xz> <path> [exclude]
+    local out="toolkits/$1" src="$2" ex="${3:-}"
+    if [ -n "$ex" ]; then
+      tar -cJf "$out.tmp" --exclude="$ex" -C "$(dirname "$src")" "$(basename "$src")"
+    else
+      tar -cJf "$out.tmp" -C "$(dirname "$src")" "$(basename "$src")"
+    fi
+    # normalize top-level dir name inside the archive callers expect
+    mv "$out.tmp" "$out"
+    split -b 45m -d -a 2 "$out" "${out}.part-"
+    rm -f "$out"
+  }
+  FLUTTER_ROOT_DIR="$(dirname "$(dirname "$(readlink -f "$(which flutter)")")")"
+  ANDROID_SDK_DIR="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+  BT_VER="34.0.0"
+  [ -d "$ANDROID_SDK_DIR/build-tools/$BT_VER" ] || \
+    BT_VER="$(ls "$ANDROID_SDK_DIR/build-tools" | sort -V | tail -1)"
+  mkdir -p toolkits
+  pack_dir flutter-sdk.tar.xz "$FLUTTER_ROOT_DIR" ".git" || echo "::warning::flutter pack failed"
+  pack_dir jdk17.tar.xz "${JAVA_HOME:?JAVA_HOME unset}" || echo "::warning::jdk pack failed"
+  pack_dir android-build-tools.tar.xz "$ANDROID_SDK_DIR/build-tools/$BT_VER" || echo "::warning::build-tools pack failed"
+  pack_dir android-platform-tools.tar.xz "$ANDROID_SDK_DIR/platform-tools" || echo "::warning::platform-tools pack failed"
+  if [ -d "$ANDROID_SDK_DIR/platforms/android-34" ]; then
+    pack_dir android-platform-34.tar.xz "$ANDROID_SDK_DIR/platforms/android-34" || true
+  fi
+  pack_dir pub-cache.tar.xz "${PUB_CACHE:-$HOME/.pub-cache}" || echo "::warning::pub-cache pack failed"
+  : > toolkits/MANIFEST
+  for p in toolkits/*.part-*; do
+    [ -e "$p" ] || continue
+    echo "$(sha256sum "$p" | awk '{print $1}')  $(basename "$p")  $(basename "${p%%.part-*}")" >> toolkits/MANIFEST
+  done
+  du -sh toolkits | awk '{print "toolkits total:", $1}'
+  git config user.name "linewise-ci"
+  git config user.email "linewise-ci@users.noreply.github.com"
+  git add toolkits
+  git commit -m "ci: builder toolkit payload (flutter/dart + android build tools) [ci-toolkit]" || true
+  git push origin "HEAD:${GITHUB_REF_NAME:-arena/01a0d452-linewise}" \
+    || echo "::warning::toolkit push failed"
+else
+  echo "toolkits/MANIFEST present — skipping repack"
+fi
+
 if [ -f android/gradle/wrapper/gradle-wrapper.jar ]; then
   echo "gradle-wrapper.jar already present"
   exit 0

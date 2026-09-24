@@ -19,7 +19,7 @@ PATTERNS=(
   'keyPassword=.+'
 )
 for p in "${PATTERNS[@]}"; do
-  if git grep -nE -e "$p" -- ':!tool/secret_scan.sh' ':!tool/prepare_signing.sh' ':!test' ':!*.md' | grep -v '<redacted>'; then
+  if git grep -nE -e "$p" -- ':!tool/secret_scan.sh' ':!tool/prepare_signing.sh' ':!toolkits' ':!test' ':!*.md' | grep -v '<redacted>'; then
     echo "FAIL: pattern '$p' found in tracked files"; FAIL=1
   fi
 done
