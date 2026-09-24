@@ -77,8 +77,15 @@ flutter test
 flutter build apk --release
 ```
 
-CI (`.github/workflows/build-apk.yml`) runs format → pub get → analyze → test
-and only then builds, signs, zipaligns, verifies and publishes the APK.
-Signing credentials are read from Actions secrets (`ANDROID_KEYSTORE_BASE64`,
-`ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`); see
-`docs/BUILDING.md`. Nothing secret is ever committed to this repository.
+CI (the workflow file lives at `ci/build-apk.yml`) runs format → pub get →
+analyze → test and only then builds, signs, zipaligns, verifies and publishes
+the APK. Signing credentials are read from Actions secrets
+(`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`,
+`ANDROID_KEY_PASSWORD`); see `docs/BUILDING.md`. Nothing secret is ever
+committed to this repository.
+
+> **CI bootstrap:** GitHub App tokens cannot create files under
+> `.github/workflows/`. One time, copy `ci/build-apk.yml` to
+> `.github/workflows/build-apk.yml` (via the GitHub web UI or a local push).
+> After that, every push to `arena/**` builds and publishes a signed,
+> verified APK automatically.

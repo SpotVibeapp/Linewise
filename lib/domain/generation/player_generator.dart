@@ -1,4 +1,4 @@
-import '../../core/ids.dart';
+import '../../core/deterministic_id.dart';
 import '../models/exact_line.dart';
 import '../models/pick.dart';
 import '../models/player_history.dart';
@@ -68,7 +68,15 @@ class PlayerGenerator {
       final line = linesByStatKey[statKey];
       for (final direction in PropDirection.values) {
         out.add(engine.buildCandidate(
-          id: newId('pick'),
+          id: contentId('pick', {
+            'subjectId': subjectId,
+            'sportId': sportId,
+            'slateDate': slateDate.iso,
+            'market': MarketType.playerProp.name,
+            'statKey': statKey,
+            'direction': direction.name,
+            'lineId': line?.id ?? 'none',
+          }),
           subjectId: subjectId,
           subjectName: subjectName,
           sportId: sportId,

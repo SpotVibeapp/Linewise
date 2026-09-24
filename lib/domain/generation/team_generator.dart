@@ -1,4 +1,4 @@
-import '../../core/ids.dart';
+import '../../core/deterministic_id.dart';
 import '../models/exact_line.dart';
 import '../models/pick.dart';
 import '../models/player_history.dart';
@@ -154,7 +154,15 @@ class TeamGenerator {
     );
 
     return engine.buildCandidate(
-      id: newId('pick'),
+      id: contentId('pick', {
+        'subjectId': teamId,
+        'sportId': sportId,
+        'slateDate': slateDate.iso,
+        'market': market.name,
+        'statKey': statKey,
+        'direction': direction.name,
+        'lineId': line?.id ?? 'none',
+      }),
       subjectId: teamId,
       subjectName: teamName,
       sportId: sportId,
