@@ -58,7 +58,8 @@ class _ManualEntryPageState extends State<ManualEntryPage> {
           const SizedBox(height: 8),
           TextField(
               controller: _value,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               decoration: const InputDecoration(
                   labelText: 'Exact line value (as supplied)',
                   border: OutlineInputBorder())),
@@ -79,7 +80,7 @@ class _ManualEntryPageState extends State<ManualEntryPage> {
                   double.tryParse(_value.text.trim()) == null) {
                 setState(() => _status =
                     'Player, statistic, numeric value and a source are all '
-                    'required. Lines are never invented.');
+                        'required. Lines are never invented.');
                 return;
               }
               services.lines.add(ExactLine(
@@ -117,8 +118,7 @@ class _ManualEntryPageState extends State<ManualEntryPage> {
           const SizedBox(height: 8),
           FilledButton.tonal(
             onPressed: () {
-              final res =
-                  services.importService.importLines(_paste.text);
+              final res = services.importService.importLines(_paste.text);
               services.lines.addAll(res.lines);
               services.lines.persist();
               setState(() {

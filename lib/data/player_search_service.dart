@@ -30,11 +30,11 @@ class PlayerSearchResult {
 
   String get emptyStateMessage => hasNoMatches
       ? 'No selections matched "$query" among loaded lines, and the free public '
-        'search found no players. Try a different spelling. No provider credits '
-        'were used.'
+          'search found no players. Try a different spelling. No provider credits '
+          'were used.'
       : 'Free public player-history analysis is available even when zero '
-        'provider lines are loaded. Exact provider lines depend on provider '
-        'coverage and quota.';
+          'provider lines are loaded. Exact provider lines depend on provider '
+          'coverage and quota.';
 }
 
 /// The known-problem fix: searching a player (e.g. "Derrick Henry") must
@@ -63,14 +63,17 @@ class PlayerSearchService {
     return PlayerSearchResult(
       query: query,
       athletes: athletes,
-      loadedLines: [...local, ...{for (final l in localTeams) l.id: l}.values],
+      loadedLines: [
+        ...local,
+        ...{for (final l in localTeams) l.id: l}.values
+      ],
       freeAnalysisNote: local.isEmpty
           ? 'Zero provider lines are loaded for this search. You can still run '
-            'free public player-history analysis below — it does not use Odds '
-            'API credits. Exact provider lines require a separate, explicitly '
-            'approved billable request and depend on provider coverage and quota.'
+              'free public player-history analysis below — it does not use Odds '
+              'API credits. Exact provider lines require a separate, explicitly '
+              'approved billable request and depend on provider coverage and quota.'
           : 'Matched ${local.length} loaded line(s) locally (loaded-line '
-            'filtering — no network, no cost).',
+              'filtering — no network, no cost).',
     );
   }
 

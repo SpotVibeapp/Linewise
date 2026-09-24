@@ -31,7 +31,8 @@ class EspnClient {
       [Map<String, String> params = const {}]) async {
     final uri = Uri.https(siteHost, path, params);
     try {
-      final resp = await httpClient.get(uri).timeout(const Duration(seconds: 20));
+      final resp =
+          await httpClient.get(uri).timeout(const Duration(seconds: 20));
       if (resp.statusCode != 200) {
         log.warn('ESPN HTTP ${resp.statusCode} for $path');
         return null;
@@ -61,7 +62,8 @@ class EspnClient {
       final Map? payload = direct is Map ? direct : node;
       if (payload == null) return;
       final id = payload['id']?.toString();
-      final name = payload['displayName']?.toString() ?? payload['name']?.toString();
+      final name =
+          payload['displayName']?.toString() ?? payload['name']?.toString();
       if (id == null || name == null) return;
       if (type.isNotEmpty && type != 'athlete') {
         // Some shapes nest under results→entries with type on the entry.
@@ -87,7 +89,8 @@ class EspnClient {
       final leagues = (sport['leagues'] as List? ?? const []).cast<Object?>();
       for (final league in leagues) {
         if (league is! Map) continue;
-        final entries = (league['entries'] as List? ?? const []).cast<Object?>();
+        final entries =
+            (league['entries'] as List? ?? const []).cast<Object?>();
         for (final entry in entries) {
           consider(entry);
         }
@@ -154,6 +157,7 @@ class EspnClient {
               }
             }
           }
+
           collectStats(statsNode);
           final didNotPlay = ev['played'] == false ||
               '${ev['status'] ?? ''}'.toUpperCase().contains('DNP');
@@ -184,7 +188,8 @@ class EspnClient {
     required SportLeague sport,
     required SlateDate slateDate,
   }) async {
-    final json = await _getJson('apis/site/v2/sports/${sport.espnPath}/scoreboard',
+    final json = await _getJson(
+        'apis/site/v2/sports/${sport.espnPath}/scoreboard',
         {'dates': slateDate.iso.replaceAll('-', '')});
     if (json == null) return const [];
     final events = (json['events'] as List? ?? const []).cast<Object?>();
@@ -218,7 +223,9 @@ class EspnClient {
         double? lat, lon;
         if (venue is Map) {
           venueName = venue['fullName']?.toString();
-          outdoor = venue['indoor'] == true ? false : (venue['indoor'] == false ? true : null);
+          outdoor = venue['indoor'] == true
+              ? false
+              : (venue['indoor'] == false ? true : null);
           final addr = venue['address'];
           if (addr is Map) {
             lat = double.tryParse('${addr['latitude'] ?? ''}');

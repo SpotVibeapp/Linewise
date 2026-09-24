@@ -39,7 +39,8 @@ class OpenMeteoClient {
       'end_date': day,
     });
     try {
-      final resp = await httpClient.get(uri).timeout(const Duration(seconds: 20));
+      final resp =
+          await httpClient.get(uri).timeout(const Duration(seconds: 20));
       if (resp.statusCode != 200) {
         log.warn('Open-Meteo HTTP ${resp.statusCode}');
         return null;
@@ -56,6 +57,7 @@ class OpenMeteoClient {
         if (nums.isEmpty) return 0;
         return nums.reduce((a, b) => a + b) / nums.length;
       }
+
       final t = avg(temps);
       final w = avg(wind);
       final p = avg(precip);

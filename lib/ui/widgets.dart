@@ -79,8 +79,7 @@ class PickListTile extends StatelessWidget {
         trailing: const Icon(Icons.chevron_right),
         onTap: () {
           Navigator.of(context).push(
-            MaterialPageRoute<void>(
-                builder: (_) => PickDetailPage(pick: pick)),
+            MaterialPageRoute<void>(builder: (_) => PickDetailPage(pick: pick)),
           );
         },
       ),
@@ -114,8 +113,7 @@ class SectionHeader extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 15, fontWeight: FontWeight.w700)),
             ),
-            if (kind != null)
-              RequestKindBadge(kind: kind!),
+            if (kind != null) RequestKindBadge(kind: kind!),
           ]),
           if (subtitle != null)
             Padding(

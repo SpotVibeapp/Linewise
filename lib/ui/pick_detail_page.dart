@@ -16,12 +16,14 @@ class PickDetailPage extends StatelessWidget {
     final supporting = pick.supportingFactors;
     final opposing = pick.opposingFactors;
     return Scaffold(
-      appBar: AppBar(title: Text('${pick.direction.label} · ${pick.statDisplayName}')),
+      appBar: AppBar(
+          title: Text('${pick.direction.label} · ${pick.statDisplayName}')),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           Text('${pick.subjectName}',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              style:
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           if (pick.gameDescription != null)
             Text(pick.gameDescription!,
                 style: TextStyle(color: Colors.grey.shade700)),
@@ -30,10 +32,12 @@ class PickDetailPage extends StatelessWidget {
             Chip(
               label: Text(pick.isDefensible ? 'Defensible' : 'Withheld'),
               visualDensity: VisualDensity.compact,
-              backgroundColor:
-                  pick.isDefensible ? Colors.teal.shade50 : Colors.grey.shade200,
+              backgroundColor: pick.isDefensible
+                  ? Colors.teal.shade50
+                  : Colors.grey.shade200,
             ),
-            if (pick.quality != null) QualityBadge(quality: pick.quality!.label),
+            if (pick.quality != null)
+              QualityBadge(quality: pick.quality!.label),
             RequestKindBadgeSpacer(market: pick.market),
           ]),
           if (!pick.isDefensible)
@@ -65,8 +69,7 @@ class PickDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     FactRow(
-                        label: 'Win % definition',
-                        value: kWinPctDefinition),
+                        label: 'Win % definition', value: kWinPctDefinition),
                     FactRow(
                         label: 'Uncertainty (90%)',
                         value:
@@ -106,16 +109,14 @@ class PickDetailPage extends StatelessWidget {
                   FactRow(label: 'Source', value: pick.line?.source ?? '—'),
                   FactRow(
                       label: 'Line timestamp',
-                      value: pick.line?.sourceTimestamp
-                              .toIso8601String() ??
-                          '—'),
+                      value:
+                          pick.line?.sourceTimestamp.toIso8601String() ?? '—'),
                   FactRow(
                       label: 'History source',
                       value: pick.historySource ?? '—'),
                   FactRow(
                       label: 'History fetched',
-                      value:
-                          pick.historyFetchedAt?.toIso8601String() ?? '—'),
+                      value: pick.historyFetchedAt?.toIso8601String() ?? '—'),
                   FactRow(
                       label: 'Generated at',
                       value: pick.generatedAt.toIso8601String()),
@@ -130,10 +131,7 @@ class PickDetailPage extends StatelessWidget {
           _factorCard(opposing, empty: 'No opposing factors identified.'),
           _section('Neutral / descriptive (never double-counted)'),
           _factorCard(
-            pick.factors
-                .where((f) =>
-                    f.stance.name == 'neutral')
-                .toList(),
+            pick.factors.where((f) => f.stance.name == 'neutral').toList(),
             empty: 'None.',
           ),
           _section('Unknown or stale information'),
@@ -168,8 +166,8 @@ class PickDetailPage extends StatelessWidget {
   Widget _factorCard(List factors, {required String empty}) {
     if (factors.isEmpty) {
       return Card(
-          child: Padding(
-              padding: const EdgeInsets.all(12), child: Text(empty)));
+          child:
+              Padding(padding: const EdgeInsets.all(12), child: Text(empty)));
     }
     return Card(
       child: Padding(
@@ -183,11 +181,13 @@ class PickDetailPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${f.label} · ${f.source}'
+                    Text(
+                        '${f.label} · ${f.source}'
                         '${f.descriptiveOnly ? ' (descriptive — inside baseline, not adjusted again)' : ''}',
                         style: const TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 13)),
-                    Text('${f.detail}'
+                    Text(
+                        '${f.detail}'
                         '${f.adjustmentPP != 0 ? ' [adj ${f.adjustmentPP.toStringAsFixed(1)} pp]' : ''}',
                         style: const TextStyle(fontSize: 13)),
                   ],

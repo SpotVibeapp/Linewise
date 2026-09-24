@@ -65,14 +65,19 @@ void main() {
     });
 
     test('moneyline variant reports push/tie as 0 (not applicable)', () {
-      final won = [for (var i = 0; i < 13; i++) true, for (var i = 0; i < 10; i++) false];
+      final won = [
+        for (var i = 0; i < 13; i++) true,
+        for (var i = 0; i < 10; i++) false
+      ];
       final e = est.estimateBinaryWins(
           wonGames: won, direction: PropDirection.higher)!;
       expect(e.pushPct, 0);
       expect(e.winPct, closeTo(13 / 23 * 100, 1e-9));
       expect(e.sampleSize, 23);
-      expect(est.estimateBinaryWins(
-          wonGames: [true, false], direction: PropDirection.higher), isNull);
+      expect(
+          est.estimateBinaryWins(
+              wonGames: [true, false], direction: PropDirection.higher),
+          isNull);
     });
   });
 }

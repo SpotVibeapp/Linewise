@@ -35,14 +35,15 @@ class CalibrationRepository {
   Future<void> persist() async {
     await _dir.create(recursive: true);
     final file = File('${_dir.path}/$_fileName');
-    await file.writeAsString(jsonEncode(
-        [for (final o in _outcomes.values) o.toMap()]));
+    await file.writeAsString(
+        jsonEncode([for (final o in _outcomes.values) o.toMap()]));
   }
 
   Future<void> load() async {
     final file = File('${_dir.path}/$_fileName');
     if (!await file.exists()) return;
-    final list = (jsonDecode(await file.readAsString()) as List).cast<Object?>();
+    final list =
+        (jsonDecode(await file.readAsString()) as List).cast<Object?>();
     _outcomes.clear();
     for (final item in list) {
       if (item is! Map) continue;

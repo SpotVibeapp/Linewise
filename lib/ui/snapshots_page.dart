@@ -45,8 +45,9 @@ class _SnapshotsPageState extends State<SnapshotsPage> {
           ? throw StateError('empty')
           : snap.picks.first.slateDate,
     );
-    final content =
-        asJson ? services.exportService.toJson(bundle) : services.exportService.toCsv(bundle);
+    final content = asJson
+        ? services.exportService.toJson(bundle)
+        : services.exportService.toCsv(bundle);
     final docs = await getApplicationDocumentsDirectory();
     final dir = Directory('${docs.path}/linewise/exports');
     await dir.create(recursive: true);
@@ -57,7 +58,7 @@ class _SnapshotsPageState extends State<SnapshotsPage> {
     if (mounted) {
       setState(() => _status =
           'Export written to ${file.path} (includes withheld rows) and copied '
-          'to the clipboard. No credentials are included.');
+              'to the clipboard. No credentials are included.');
     }
   }
 

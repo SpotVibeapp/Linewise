@@ -16,7 +16,9 @@ Future<bool> showBillableRequestDialog(
       final isBillable = estimate.isBillable;
       return AlertDialog(
         title: Row(children: [
-          Expanded(child: Text(isBillable ? 'Billable request' : 'Provider request')),
+          Expanded(
+              child:
+                  Text(isBillable ? 'Billable request' : 'Provider request')),
           RequestKindBadge(kind: estimate.kind),
         ]),
         content: Column(

@@ -83,17 +83,16 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
         sportId: _sport.id,
         slateDate: slateDate,
         history: history,
-        linesByStatKey: services.lines.linesByStatForPlayer(athlete.displayName),
+        linesByStatKey:
+            services.lines.linesByStatForPlayer(athlete.displayName),
       );
       setState(() {
         _history = history;
         _generated = generated;
         services.model.setLastGenerated(generated.cast<PickCandidate>());
-        final withLine = generated
-            .where((p) => (p as PickCandidate).line != null)
-            .length;
-        _status =
-            'History: ${history.observations.length} observation rows. '
+        final withLine =
+            generated.where((p) => (p as PickCandidate).line != null).length;
+        _status = 'History: ${history.observations.length} observation rows. '
             '${generated.length} Higher/Lower candidate rows generated '
             '($withLine with an exact line). Everything above was free — '
             'no Odds API credits used.';
@@ -200,7 +199,9 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
         DropdownButtonFormField<SportLeague>(
           value: _sport,
           decoration: const InputDecoration(
-              labelText: 'Sport / league', border: OutlineInputBorder(), isDense: true),
+              labelText: 'Sport / league',
+              border: OutlineInputBorder(),
+              isDense: true),
           items: [
             for (final s in supportedSports)
               DropdownMenuItem(value: s, child: Text(s.displayName)),
@@ -227,7 +228,8 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
             subtitle: 'Lines already loaded into the app. Filtering is free.',
           ),
           if ((result.loadedLines as List).isEmpty)
-            const Text('No loaded lines matched.', style: TextStyle(fontSize: 13))
+            const Text('No loaded lines matched.',
+                style: TextStyle(fontSize: 13))
           else
             for (final line in result.loadedLines as List<ExactLine>)
               ListTile(
@@ -235,7 +237,8 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
                 title: Text(
                     '${line.playerName ?? line.teamId} · ${line.statDisplayName}'
                     ' ${line.value ?? ''}'),
-                subtitle: Text('${line.source} · ${line.sourceTimestamp.toIso8601String()}'),
+                subtitle: Text(
+                    '${line.source} · ${line.sourceTimestamp.toIso8601String()}'),
               ),
           SectionHeader(
             title: 'Free public player results',
@@ -248,7 +251,8 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
               child: ExpansionTile(
                 title: Text('${athlete.displayName}'),
                 subtitle: Text(
-                    '${athlete.teamName ?? ''} ${athlete.position ?? ''}'.trim()),
+                    '${athlete.teamName ?? ''} ${athlete.position ?? ''}'
+                        .trim()),
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(12),
@@ -284,8 +288,7 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
           SectionHeader(
               title: 'Candidates (incl. withheld)',
               kind: RequestKind.freePublicHistory),
-          for (final p in _generated)
-            PickListTile(pick: p as PickCandidate),
+          for (final p in _generated) PickListTile(pick: p as PickCandidate),
         ],
         const SizedBox(height: 24),
       ],
@@ -321,8 +324,7 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
                   for (final ev in _providerEvents)
                     DropdownMenuItem(
                       value: ev.id as String,
-                      child: Text(
-                          '${ev.awayTeam} @ ${ev.homeTeam}',
+                      child: Text('${ev.awayTeam} @ ${ev.homeTeam}',
                           overflow: TextOverflow.ellipsis),
                     ),
                 ],
@@ -334,8 +336,8 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
               Wrap(
                 spacing: 4,
                 children: [
-                  for (final m
-                      in kPlayerPropMarketsBySport[_sport.id] ?? const <String>[])
+                  for (final m in kPlayerPropMarketsBySport[_sport.id] ??
+                      const <String>[])
                     FilterChip(
                       label: Text(m, style: const TextStyle(fontSize: 11)),
                       selected: _selectedMarkets.contains(m),
@@ -365,9 +367,7 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
               ),
               const SizedBox(height: 6),
               Text(
-                services.safeModeCache
-                    ? kSafeModeHelp
-                    : kZeroLineHelp,
+                services.safeModeCache ? kSafeModeHelp : kZeroLineHelp,
                 style: const TextStyle(fontSize: 12),
               ),
             ],

@@ -10,7 +10,6 @@ import 'canonical_json.dart';
 /// date, market, statistic, direction and line) so that regenerating the same
 /// picks yields the same ids and identical snapshots hash identically.
 String contentId(String prefix, Map<String, Object?> fields) {
-  final digest =
-      sha256.convert(utf8.encode(canonicalJson(fields))).toString();
+  final digest = sha256.convert(utf8.encode(canonicalJson(fields))).toString();
   return '$prefix-${digest.substring(0, 24)}';
 }

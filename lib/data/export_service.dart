@@ -104,8 +104,8 @@ class ExportService {
         'picks': [for (final p in bundle.picks) p.toMap()],
       });
 
-  String calibrationCsv(List<PickCandidate> picks,
-      List<ManualOutcome> outcomes, CalibrationReport report) {
+  String calibrationCsv(List<PickCandidate> picks, List<ManualOutcome> outcomes,
+      CalibrationReport report) {
     final byId = {for (final o in outcomes) o.pickId: o};
     final rows = <List<String>>[
       [
@@ -124,7 +124,14 @@ class ExportService {
           byId[p.id]?.note ?? '',
         ],
       const [],
-      ['bucket_low', 'bucket_high', 'count', 'avg_predicted_pct', 'observed_win_rate', 'push_count'],
+      [
+        'bucket_low',
+        'bucket_high',
+        'count',
+        'avg_predicted_pct',
+        'observed_win_rate',
+        'push_count'
+      ],
       for (final b in report.buckets)
         [
           b.lowerPct.toStringAsFixed(0),

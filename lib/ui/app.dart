@@ -52,8 +52,7 @@ class AppScope extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(AppScope oldWidget) =>
-      oldWidget.services != services;
+  bool updateShouldNotify(AppScope oldWidget) => oldWidget.services != services;
 }
 
 class HomeShell extends StatefulWidget {
@@ -80,8 +79,8 @@ class _HomeShellState extends State<HomeShell> {
     super.didChangeDependencies();
     // Every provider request shows the cost-preview dialog first.
     final services = AppScope.of(context);
-    services.approval.handler = (estimate) =>
-        showBillableRequestDialog(this.context, estimate);
+    services.approval.handler =
+        (estimate) => showBillableRequestDialog(this.context, estimate);
   }
 
   @override
@@ -155,8 +154,8 @@ class RequestKindBadge extends StatelessWidget {
       ),
       child: Text(
         requestKindBadges[kind] ?? kind.label,
-        style: TextStyle(
-            fontSize: 11, fontWeight: FontWeight.w600, color: color),
+        style:
+            TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: color),
       ),
     );
   }

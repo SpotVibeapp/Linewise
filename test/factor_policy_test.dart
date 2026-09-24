@@ -3,7 +3,8 @@ import 'package:linewise/domain/models/evidence.dart';
 import 'package:linewise/domain/probability/factor_groups.dart';
 
 Factor f(String id, FactorGroup g, double adj,
-        {bool descriptive = false, FactorStance stance = FactorStance.supporting}) =>
+        {bool descriptive = false,
+        FactorStance stance = FactorStance.supporting}) =>
     Factor(
       signalId: id,
       group: g,
@@ -30,8 +31,8 @@ void main() {
     test('descriptive-only factors can never adjust', () {
       final guard = DoubleCountGuard();
       expect(
-        () => f('role.recent_form', FactorGroup.roleUsage, 3,
-            descriptive: true),
+        () =>
+            f('role.recent_form', FactorGroup.roleUsage, 3, descriptive: true),
         throwsA(isA<AssertionError>()),
       );
     });
@@ -41,7 +42,8 @@ void main() {
     test('per-group cap clamps the group total', () {
       final guard = DoubleCountGuard();
       final total = applyAdjustmentPolicy([
-        f('availability.injuries_availability', FactorGroup.availabilityHealth, -6),
+        f('availability.injuries_availability', FactorGroup.availabilityHealth,
+            -6),
         f('availability.lineup_changes', FactorGroup.availabilityHealth, -6,
             stance: FactorStance.opposing),
       ], guard);

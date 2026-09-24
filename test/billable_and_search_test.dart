@@ -62,35 +62,35 @@ http.Response espnGamelog(_) => http.Response(
     200);
 
 http.Response oddsBody(_) => http.Response(
-    jsonEncode([
-      {
-        'id': 'ev1',
-        'sport_key': 'americanfootball_nfl',
-        'commence_time': '2026-09-24T20:00:00Z',
-        'home_team': 'Baltimore Ravens',
-        'away_team': 'Dallas Cowboys',
-        'bookmakers': [
+        jsonEncode([
           {
-            'key': 'fanduel',
-            'last_update': '2026-09-24T11:00:00Z',
-            'markets': [
+            'id': 'ev1',
+            'sport_key': 'americanfootball_nfl',
+            'commence_time': '2026-09-24T20:00:00Z',
+            'home_team': 'Baltimore Ravens',
+            'away_team': 'Dallas Cowboys',
+            'bookmakers': [
               {
-                'key': 'player_rush_yds',
-                'outcomes': [
-                  {'name': 'Derrick Henry', 'point': 87.5, 'price': 1.91}
+                'key': 'fanduel',
+                'last_update': '2026-09-24T11:00:00Z',
+                'markets': [
+                  {
+                    'key': 'player_rush_yds',
+                    'outcomes': [
+                      {'name': 'Derrick Henry', 'point': 87.5, 'price': 1.91}
+                    ]
+                  }
                 ]
               }
             ]
           }
-        ]
-      }
-    ]),
-    200,
-    headers: {
-      'x-requests-remaining': '400',
-      'x-requests-used': '2',
-      'x-requests-last': '1',
-    });
+        ]),
+        200,
+        headers: {
+          'x-requests-remaining': '400',
+          'x-requests-used': '2',
+          'x-requests-last': '1',
+        });
 
 AppServices makeServices(MockClient client, {String? apiKey}) {
   final keys = MemoryApiKeyStore();
@@ -138,8 +138,8 @@ void main() {
         reason: 'zero provider lines are loaded');
     expect(result.freeAnalysisNote, contains('Zero provider lines'));
 
-    final history = await services.search.analyzeHistory(
-        sport: sport, athlete: result.athletes.first);
+    final history = await services.search
+        .analyzeHistory(sport: sport, athlete: result.athletes.first);
     expect(history.observations, isNotEmpty);
 
     final generated = services.playerGenerator.generate(
@@ -258,7 +258,9 @@ void main() {
     expect(estimate.credits, 2);
     expect(estimate.explanation, contains('2 market(s) × 1 region(s)'));
     expect(estimate.explanation, contains('BILLABLE'));
-    expect(estimate.explanation,
-        contains('A request can consume credits even when it returns zero lines.'));
+    expect(
+        estimate.explanation,
+        contains(
+            'A request can consume credits even when it returns zero lines.'));
   });
 }

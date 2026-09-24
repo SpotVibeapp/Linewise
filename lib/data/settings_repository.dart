@@ -49,7 +49,7 @@ class SettingsRepository {
   Future<void> saveProviderUsage(ProviderUsage usage) => store.write(
       _usageKey,
       '${usage.remaining ?? ''},${usage.used ?? ''},${usage.lastCost ?? ''},'
-          '${usage.observedAt?.toIso8601String() ?? ''}');
+      '${usage.observedAt?.toIso8601String() ?? ''}');
 }
 
 class ProviderUsage {

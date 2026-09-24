@@ -99,7 +99,8 @@ class SubjectHistory {
         fetchedAt: DateTime.parse(m['fetchedAt']! as String),
         isTeam: m['isTeam'] as bool? ?? false,
         observations: ((m['observations']! as List).cast<Map>())
-            .map((o) => StatObservation.fromMap(o.map((k, v) => MapEntry(k.toString(), v))))
+            .map((o) => StatObservation.fromMap(
+                o.map((k, v) => MapEntry(k.toString(), v))))
             .toList(),
       );
 }

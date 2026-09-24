@@ -60,7 +60,8 @@ void main() {
   final generator = PlayerGenerator(engine: ProbabilityEngine(clock: clock));
   final slate = SlateDate.parse('2026-09-24');
 
-  Map<String, ExactLine> withRushLine() => {'rush_yds': line('rush_yds', 100.5)};
+  Map<String, ExactLine> withRushLine() =>
+      {'rush_yds': line('rush_yds', 100.5)};
 
   test('Higher and Lower candidates for every statistic in history', () {
     final picks = generator.generate(
@@ -92,13 +93,14 @@ void main() {
       history: historyWith(),
       linesByStatKey: withRushLine(),
     );
-    final higher = picks.firstWhere((p) =>
-        p.statKey == 'rush_yds' && p.direction == PropDirection.higher);
+    final higher = picks.firstWhere(
+        (p) => p.statKey == 'rush_yds' && p.direction == PropDirection.higher);
     expect(higher.isDefensible, isTrue);
     final e = higher.estimate!;
     expect(e.sampleSize, 24);
     expect(e.winPct + e.pushPct + e.losePct, closeTo(100, 1e-9));
-    expect(kWinPctDefinition, contains('not a guarantee') | contains('estimate'));
+    expect(
+        kWinPctDefinition, contains('not a guarantee') | contains('estimate'));
     // Every contract field present.
     expect(higher.line!.source, isNotEmpty);
     expect(higher.line!.sourceTimestamp, isNotNull);
@@ -153,8 +155,8 @@ void main() {
       history: historyWith(),
       linesByStatKey: withRushLine(),
     );
-    final higher = picks.firstWhere((p) =>
-        p.statKey == 'rush_yds' && p.direction == PropDirection.higher);
+    final higher = picks.firstWhere(
+        (p) => p.statKey == 'rush_yds' && p.direction == PropDirection.higher);
     expect(higher.unknowns.join(' '), contains('stale'));
   });
 
@@ -167,8 +169,8 @@ void main() {
       history: historyWith(),
       linesByStatKey: withRushLine(),
     );
-    final higher = picks.firstWhere((p) =>
-        p.statKey == 'rush_yds' && p.direction == PropDirection.higher);
+    final higher = picks.firstWhere(
+        (p) => p.statKey == 'rush_yds' && p.direction == PropDirection.higher);
     expect(higher.line!.value, 100.5);
   });
 }

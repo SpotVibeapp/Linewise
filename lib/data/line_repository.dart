@@ -61,8 +61,7 @@ class LineRepository {
     if (dir == null) return;
     await dir.create(recursive: true);
     final file = File('${dir.path}/$_fileName');
-    await file.writeAsString(
-        jsonEncode([for (final l in _lines) l.toMap()]));
+    await file.writeAsString(jsonEncode([for (final l in _lines) l.toMap()]));
   }
 
   Future<void> load() async {
@@ -70,7 +69,8 @@ class LineRepository {
     if (dir == null) return;
     final file = File('${dir.path}/$_fileName');
     if (!await file.exists()) return;
-    final list = (jsonDecode(await file.readAsString()) as List).cast<Object?>();
+    final list =
+        (jsonDecode(await file.readAsString()) as List).cast<Object?>();
     _lines
       ..clear()
       ..addAll([

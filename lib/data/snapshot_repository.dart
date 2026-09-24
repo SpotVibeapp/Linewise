@@ -102,7 +102,8 @@ PickCandidate pickFromMap(Map<String, Object?> m) {
         : WithheldReason.values.byName(m['withheldReason']! as String),
     estimate: estimateMap == null
         ? null
-        : _estimateFromMap(estimateMap.map((k, v) => MapEntry(k.toString(), v))),
+        : _estimateFromMap(
+            estimateMap.map((k, v) => MapEntry(k.toString(), v))),
     quality: m['quality'] == null
         ? null
         : EvidenceQuality.values.byName(m['quality']! as String),
@@ -136,7 +137,8 @@ PickCandidate pickFromMap(Map<String, Object?> m) {
 SlateDate slateDateFromMap(Map<String, Object?> m) =>
     SlateDate.parse(m['slateDate']! as String);
 
-ProbabilityEstimate _estimateFromMap(Map<String, Object?> m) => ProbabilityEstimate(
+ProbabilityEstimate _estimateFromMap(Map<String, Object?> m) =>
+    ProbabilityEstimate(
       pHigher: (m['pHigher']! as num).toDouble(),
       pPush: (m['pPush']! as num).toDouble(),
       pLower: (m['pLower']! as num).toDouble(),

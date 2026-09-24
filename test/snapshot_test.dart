@@ -59,7 +59,8 @@ void main() {
     expect(() => repo.save(snap), throwsStateError);
   });
 
-  test('content hash verifies intact snapshots and detects tampering', () async {
+  test('content hash verifies intact snapshots and detects tampering',
+      () async {
     final clock = FixedClock(DateTime.utc(2026, 9, 24, 12));
     final repo = SnapshotRepository(storageDir: dir);
     final snap = build(clock);

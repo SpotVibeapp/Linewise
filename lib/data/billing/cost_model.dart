@@ -6,7 +6,8 @@ library;
 
 enum RequestKind {
   /// Filtering lines already loaded into the app. No network at all.
-  loadedLineFiltering('Loaded-line filtering', 'Local — no network, no cost', false),
+  loadedLineFiltering(
+      'Loaded-line filtering', 'Local — no network, no cost', false),
 
   /// Free public player-history analysis (ESPN) and weather (Open-Meteo).
   freePublicHistory('Free public player-history analysis',
@@ -14,7 +15,9 @@ enum RequestKind {
 
   /// The Odds API sports/events listings (0 credits, but needs your key).
   marketDiscovery(
-      'Market discovery', 'The Odds API listings — 0 credits (does not count against quota)', false),
+      'Market discovery',
+      'The Odds API listings — 0 credits (does not count against quota)',
+      false),
 
   /// The Odds API odds endpoints — billable.
   exactProviderLines(

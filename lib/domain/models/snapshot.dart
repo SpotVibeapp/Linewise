@@ -60,7 +60,8 @@ class PredictionSnapshot {
   String get contentHash => id;
 
   /// Recomputes the hash of [storedPayload] and compares to [storedId].
-  static bool verifyIntegrity(String storedId, Map<String, Object?> storedPayload) =>
+  static bool verifyIntegrity(
+          String storedId, Map<String, Object?> storedPayload) =>
       snapshotContentHash(storedPayload) == storedId;
 
   String encode() => jsonEncode(payload);

@@ -66,7 +66,9 @@ void main() {
     // for "higher" (cover). margin == 3 would push — construct that case.
     final pushyHistory = TeamHistory(
       wonGames: [for (var i = 0; i < 22; i++) i < 14],
-      margins: [for (var i = 0; i < 22; i++) i < 5 ? 3.0 : (i.isEven ? 10.0 : -1.0)],
+      margins: [
+        for (var i = 0; i < 22; i++) i < 5 ? 3.0 : (i.isEven ? 10.0 : -1.0)
+      ],
       totals: [for (var i = 0; i < 22; i++) 48.0],
       gameDates: [for (var i = 0; i < 22; i++) DateTime.utc(2026, 8, 1 + i)],
       source: 'ESPN team gamelog',
@@ -95,7 +97,9 @@ void main() {
     final pushy = TeamHistory(
       wonGames: [for (var i = 0; i < 20; i++) i < 10],
       margins: [for (var i = 0; i < 20; i++) 1.0],
-      totals: [for (var i = 0; i < 20; i++) i < 4 ? 48.0 : (i.isEven ? 52.0 : 41.0)],
+      totals: [
+        for (var i = 0; i < 20; i++) i < 4 ? 48.0 : (i.isEven ? 52.0 : 41.0)
+      ],
       gameDates: [for (var i = 0; i < 20; i++) DateTime.utc(2026, 8, 1 + i)],
       source: 'ESPN team gamelog',
       fetchedAt: DateTime.utc(2026, 9, 24, 10),

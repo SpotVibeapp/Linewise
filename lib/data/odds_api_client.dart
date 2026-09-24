@@ -47,8 +47,18 @@ const Map<String, List<String>> kPlayerPropMarketsBySport = {
     'player_steals',
     'player_turnovers',
   ],
-  'ncaab': ['player_points', 'player_rebounds', 'player_assists', 'player_threes'],
-  'wnba': ['player_points', 'player_rebounds', 'player_assists', 'player_threes'],
+  'ncaab': [
+    'player_points',
+    'player_rebounds',
+    'player_assists',
+    'player_threes'
+  ],
+  'wnba': [
+    'player_points',
+    'player_rebounds',
+    'player_assists',
+    'player_threes'
+  ],
   'mlb': [
     'batter_hits',
     'batter_home_runs',
@@ -212,7 +222,8 @@ class OddsApiClient {
       'apiKey': key,
     });
     try {
-      final resp = await httpClient.get(uri).timeout(const Duration(seconds: 30));
+      final resp =
+          await httpClient.get(uri).timeout(const Duration(seconds: 30));
       final usage = ProviderUsage(
         remaining: int.tryParse(resp.headers['x-requests-remaining'] ?? ''),
         used: int.tryParse(resp.headers['x-requests-used'] ?? ''),
@@ -283,9 +294,9 @@ class OddsApiClient {
       for (final book in books) {
         if (book is! Map) continue;
         final bookKey = book['key']?.toString() ?? '';
-        final lastUpdate = DateTime.tryParse(
-                book['last_update']?.toString() ?? '') ??
-            DateTime.now().toUtc();
+        final lastUpdate =
+            DateTime.tryParse(book['last_update']?.toString() ?? '') ??
+                DateTime.now().toUtc();
         final markets = (book['markets'] as List? ?? const []).cast<Object?>();
         for (final market in markets) {
           if (market is! Map) continue;
@@ -326,8 +337,7 @@ class OddsApiClient {
               value: point,
               playerName: isPlayerProp ? name : null,
               teamId: isPlayerProp ? null : name,
-              source:
-                  'The Odds API/$sportKey/$bookKey/$marketKey',
+              source: 'The Odds API/$sportKey/$bookKey/$marketKey',
               sourceTimestamp: lastUpdate,
               providerEventId: id,
               providerBookmaker: bookKey,

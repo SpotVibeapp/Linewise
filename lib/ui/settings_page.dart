@@ -90,8 +90,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       await _refresh();
                       setState(() => _status =
                           'Key saved to encrypted Android storage. It will be '
-                          'preserved across normal signed updates and is never '
-                          'included in backups, logs, exports or source.');
+                              'preserved across normal signed updates and is never '
+                              'included in backups, logs, exports or source.');
                     },
                     child: const Text('Save key (encrypted)'),
                   ),
@@ -101,7 +101,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         final services = this.services;
                         await services.apiKeyStore.deleteKey();
                         await _refresh();
-                        setState(() => _status = 'Key removed from the device.');
+                        setState(
+                            () => _status = 'Key removed from the device.');
                       },
                       child: const Text('Remove key'),
                     ),
@@ -112,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         SectionHeader(title: 'Safe mode'),
         Card(
-            child: SwitchListTile(
+          child: SwitchListTile(
             title: const Text('Safe mode (disable all The Odds API requests)'),
             subtitle: Text(kSafeModeHelp),
             value: _safeMode,
@@ -162,7 +163,8 @@ class _SettingsPageState extends State<SettingsPage> {
         Card(
           child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Text(_usageText ?? '…', style: const TextStyle(fontSize: 13)),
+            child:
+                Text(_usageText ?? '…', style: const TextStyle(fontSize: 13)),
           ),
         ),
         SectionHeader(title: 'Slate-date derivation'),
@@ -215,13 +217,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   'automatic settlement. Never claims guaranteed accuracy.',
                   style: TextStyle(fontSize: 12),
                 ),
-                Text('Diagnostics (redacted): ${services.log.lines.length} lines',
+                Text(
+                    'Diagnostics (redacted): ${services.log.lines.length} lines',
                     style: const TextStyle(fontSize: 12)),
                 if (_status != null)
                   Padding(
                     padding: const EdgeInsets.only(top: 8),
-                    child:
-                        Text(_status!, style: const TextStyle(fontSize: 13)),
+                    child: Text(_status!, style: const TextStyle(fontSize: 13)),
                   ),
               ],
             ),

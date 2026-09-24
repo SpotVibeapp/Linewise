@@ -44,8 +44,7 @@ double applyAdjustmentPolicy(List<Factor> factors, DoubleCountGuard guard) {
 
   perGroup.forEach((group, value) {
     final cap = kPerGroupAdjustmentCapPP[group]!;
-    final clamped =
-        value < -cap ? -cap : (value > cap ? cap : value);
+    final clamped = value < -cap ? -cap : (value > cap ? cap : value);
     total += clamped;
   });
 

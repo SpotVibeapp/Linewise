@@ -5,29 +5,24 @@ void main() {
   const model = OddsCostModel();
 
   test('odds cost = markets × regions (provider documented)', () {
+    expect(model.oddsRequest(markets: ['h2h'], regions: ['us']).credits, 1);
     expect(
-        model
-            .oddsRequest(markets: ['h2h'], regions: ['us']).credits,
-        1);
-    expect(
-        model
-            .oddsRequest(markets: ['h2h', 'spreads', 'totals'], regions: ['us'])
-            .credits,
+        model.oddsRequest(
+            markets: ['h2h', 'spreads', 'totals'], regions: ['us']).credits,
         3);
     expect(
-        model
-            .oddsRequest(
-                markets: ['h2h', 'spreads', 'totals'], regions: ['us', 'uk', 'eu'])
-            .credits,
+        model.oddsRequest(
+            markets: ['h2h', 'spreads', 'totals'],
+            regions: ['us', 'uk', 'eu']).credits,
         9);
   });
 
   test('historical odds cost 10×', () {
     expect(
-        model
-            .oddsRequest(
-                markets: ['player_pass_yds'], regions: ['us'], historical: true)
-            .credits,
+        model.oddsRequest(
+            markets: ['player_pass_yds'],
+            regions: ['us'],
+            historical: true).credits,
         10);
   });
 
@@ -44,8 +39,10 @@ void main() {
         markets: ['player_rush_yds', 'player_rec_yds'], regions: ['us']);
     expect(e.isBillable, isTrue);
     expect(e.credits, 2);
-    expect(e.explanation,
-        contains('A request can consume credits even when it returns zero lines.'));
+    expect(
+        e.explanation,
+        contains(
+            'A request can consume credits even when it returns zero lines.'));
     expect(e.zeroResultWarning, contains('zero lines'));
   });
 

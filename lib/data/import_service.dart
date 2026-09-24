@@ -18,7 +18,8 @@ class ImportService {
   ImportResult importLines(String text, {DateTime? now}) {
     final trimmed = text.trim();
     if (trimmed.isEmpty) {
-      return ImportResult(lines: const [], errors: const ['Nothing to import.']);
+      return ImportResult(
+          lines: const [], errors: const ['Nothing to import.']);
     }
     final at = now ?? DateTime.now().toUtc();
     if (trimmed.startsWith('[') || trimmed.startsWith('{')) {
@@ -55,8 +56,7 @@ class ImportService {
           statLabel: stat,
           value: value.toDouble(),
           userSource: source,
-          timestamp:
-              DateTime.tryParse('${m['timestamp'] ?? ''}') ?? at,
+          timestamp: DateTime.tryParse('${m['timestamp'] ?? ''}') ?? at,
           at: at,
           extra: {
             for (final e in m.entries)
@@ -98,7 +98,8 @@ class ImportService {
       final stat = cols[1].trim();
       final value = num.tryParse(cols[2].trim());
       final source = cols.length > 3 ? cols[3].trim() : null;
-      final timestamp = cols.length > 4 ? DateTime.tryParse(cols[4].trim()) : null;
+      final timestamp =
+          cols.length > 4 ? DateTime.tryParse(cols[4].trim()) : null;
       if (player.isEmpty || stat.isEmpty || value == null) {
         errors.add('Row $i: bad player/stat/value — skipped.');
         continue;

@@ -20,7 +20,8 @@ void main() {
     if (await dir.exists()) await dir.delete(recursive: true);
   });
 
-  test('outcomes are manual-only and the report is computed from them', () async {
+  test('outcomes are manual-only and the report is computed from them',
+      () async {
     final clock = FixedClock(DateTime.utc(2026, 9, 24, 12));
     final calibration =
         CalibrationRepository(storageDir: Directory('${dir.path}/cal'));

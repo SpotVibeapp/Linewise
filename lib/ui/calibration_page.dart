@@ -63,7 +63,9 @@ class _CalibrationPageState extends State<CalibrationPage> {
         DropdownButtonFormField<PredictionSnapshot>(
           value: snap,
           decoration: const InputDecoration(
-              labelText: 'Snapshot', border: OutlineInputBorder(), isDense: true),
+              labelText: 'Snapshot',
+              border: OutlineInputBorder(),
+              isDense: true),
           items: [
             for (final s in _snaps)
               DropdownMenuItem(
@@ -90,11 +92,9 @@ class _CalibrationPageState extends State<CalibrationPage> {
                   Text('Settled (manual): ${report.settledCount} · '
                       'pushes ${report.pushCount} · '
                       'unsettled ${report.unsettledCount}'),
-                  Text(
-                      'Brier score: ${report.brierScore.toStringAsFixed(4)} '
+                  Text('Brier score: ${report.brierScore.toStringAsFixed(4)} '
                       '(lower is better)'),
-                  Text(
-                      'Log loss: ${report.logLoss.toStringAsFixed(4)} '
+                  Text('Log loss: ${report.logLoss.toStringAsFixed(4)} '
                       '(lower is better)'),
                   const SizedBox(height: 8),
                   const Text('Reliability buckets:',
@@ -178,7 +178,7 @@ class _CalibrationPageState extends State<CalibrationPage> {
               await services.calibration.persist();
               setState(() => _status =
                   'Outcome recorded manually for ${pick.id}. No automatic '
-                  'settlement is performed by Linewise.');
+                      'settlement is performed by Linewise.');
             },
           ),
         ]),

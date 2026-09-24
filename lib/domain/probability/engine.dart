@@ -299,8 +299,9 @@ class ProbabilityEngine {
         historySource: history.source,
         historyFetchedAt: history.fetchedAt,
         gameDescription: context.gameDescription,
-        pushLabel:
-            market == MarketType.moneyline ? 'Push/Tie: not applicable' : 'Push/Tie',
+        pushLabel: market == MarketType.moneyline
+            ? 'Push/Tie: not applicable'
+            : 'Push/Tie',
         generatedAt: generatedAt,
       );
 
@@ -339,14 +340,19 @@ class ProbabilityEngine {
       );
     }
     if (c.lineupNote != null) {
-      add('availability.lineup_changes', FactorGroup.availabilityHealth,
-          FactorStance.neutral, 'Lineup changes', c.lineupNote!, 'lineup feed',
+      add(
+          'availability.lineup_changes',
+          FactorGroup.availabilityHealth,
+          FactorStance.neutral,
+          'Lineup changes',
+          c.lineupNote!,
+          'lineup feed',
           0.0);
     }
     if (c.roleNote != null) {
-      final favorable = RegExp(r'expanded|starter|more snaps|increased',
-              caseSensitive: false)
-          .hasMatch(c.roleNote!);
+      final favorable =
+          RegExp(r'expanded|starter|more snaps|increased', caseSensitive: false)
+              .hasMatch(c.roleNote!);
       add(
         'role.role_change',
         FactorGroup.roleUsage,
@@ -414,9 +420,14 @@ class ProbabilityEngine {
     }
     if (c.travelKm != null) {
       final heavy = c.travelKm! > 1500;
-      add('situational.travel', FactorGroup.situational,
-          heavy ? FactorStance.opposing : FactorStance.neutral, 'Travel',
-          'Travel ≈ ${c.travelKm!.round()} km.', 'venue locations', heavy ? -1.5 : 0.0);
+      add(
+          'situational.travel',
+          FactorGroup.situational,
+          heavy ? FactorStance.opposing : FactorStance.neutral,
+          'Travel',
+          'Travel ≈ ${c.travelKm!.round()} km.',
+          'venue locations',
+          heavy ? -1.5 : 0.0);
     }
     if (c.scheduleNote != null) {
       add('situational.schedule', FactorGroup.situational, FactorStance.neutral,
@@ -443,7 +454,8 @@ class ProbabilityEngine {
     return out;
   }
 
-  FactorStance _hitRateStance(List<double> values, double? line, PropDirection d) {
+  FactorStance _hitRateStance(
+      List<double> values, double? line, PropDirection d) {
     if (line == null || values.isEmpty) return FactorStance.neutral;
     final wins = values
         .where((v) => d == PropDirection.higher ? v > line : v < line)

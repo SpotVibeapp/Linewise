@@ -35,10 +35,9 @@ class _SlatesPageState extends State<SlatesPage> {
       final games = await services.search.slate(_sport, _date);
       // Exact slate-date filtering: only the chosen calendar day is shown.
       final exact = games
-          .where((g) =>
-              SlateDate.fromUtc(g.commenceUtc,
-                      offset: const Duration(hours: -5))
-                  .matchesExactly(_date))
+          .where((g) => SlateDate.fromUtc(g.commenceUtc,
+                  offset: const Duration(hours: -5))
+              .matchesExactly(_date))
           .toList();
       setState(() {
         _games = exact;
@@ -125,9 +124,8 @@ class _SlatesPageState extends State<SlatesPage> {
               'Players → provider loading for billable exact lines.',
         ),
         Builder(builder: (context) {
-          final teamLines = services.lines.all
-              .where((l) => l.playerName == null)
-              .toList();
+          final teamLines =
+              services.lines.all.where((l) => l.playerName == null).toList();
           if (teamLines.isEmpty) {
             return const Text(
               'No team lines loaded. Manual entry/import works without any '

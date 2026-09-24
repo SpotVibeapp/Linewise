@@ -109,8 +109,7 @@ class EmpiricalEstimator {
   final z2 = z * z;
   final denom = 1 + z2 / total;
   final center = phat + z2 / (2 * total);
-  final margin =
-      z * math.sqrt((phat * (1 - phat) + z2 / (4 * total)) / total);
+  final margin = z * math.sqrt((phat * (1 - phat) + z2 / (4 * total)) / total);
   final lo = (center - margin) / denom;
   final hi = (center + margin) / denom;
   return (_clamp01(lo), _clamp01(hi));

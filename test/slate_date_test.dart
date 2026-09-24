@@ -7,7 +7,8 @@ void main() {
       expect(SlateDate.parse('2026-09-24').iso, '2026-09-24');
       expect(() => SlateDate.parse('2026-9-24'), throwsFormatException);
       expect(() => SlateDate.parse('09/24/2026'), throwsFormatException);
-      expect(() => SlateDate.parse('2026-09-24T00:00:00Z'), throwsFormatException);
+      expect(
+          () => SlateDate.parse('2026-09-24T00:00:00Z'), throwsFormatException);
       expect(() => SlateDate.parse(''), throwsFormatException);
     });
 
