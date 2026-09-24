@@ -86,7 +86,6 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
             services.lines.linesByStatForPlayer(athlete.displayName),
       );
       setState(() {
-        _history = history;
         _generated = generated;
         services.model.setLastGenerated(generated.cast<PickCandidate>());
         final withLine = generated.where((p) => p.line != null).length;
