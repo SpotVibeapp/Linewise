@@ -25,14 +25,15 @@ EOF
   echo "SIGNING_MODE=persistent-secrets" > dist_signing_mode.txt
   echo "Signing: persistent keystore from Actions secrets (values not printed)."
 else
+  # PKCS12 requires the key password to equal the store password.
   STORE_PASS="$(openssl rand -hex 24)"
-  KEY_PASS="$(openssl rand -hex 24)"
+  KEY_PASS="$STORE_PASS"
   keytool -genkeypair -v \
     -keystore android/app/linewise-release.p12 \
     -storetype PKCS12 \
     -alias linewise \
     -keyalg RSA -keysize 2048 -validity 10000 \
-    -storepass "$STORE_PASS" -keypass "$KEY_PASS" \
+    -storepass "$STORE_PASS" -keypass "$STORE_PASS" \
     -dname "CN=Linewise Release, OU=Mobile, O=Linewise, L=NA, S=NA, C=US" \
     >/dev/null 2>&1
   cat > android/key.properties <<EOF

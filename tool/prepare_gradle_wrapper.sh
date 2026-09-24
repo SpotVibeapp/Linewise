@@ -46,6 +46,12 @@ if flutter pub get >/dev/null 2>&1; then
   else
     push_diag "$TEST_DIAG" "flutter test"
   fi
+  BUILD_DIAG=ci/last-build-diag.txt
+  if flutter build apk --release >"$BUILD_DIAG" 2>&1; then
+    rm -f "$BUILD_DIAG"
+  else
+    push_diag "$BUILD_DIAG" "flutter build"
+  fi
 fi
 
 if [ -f android/gradle/wrapper/gradle-wrapper.jar ]; then
