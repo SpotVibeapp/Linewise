@@ -1,0 +1,12 @@
+{
+  "app": "Linewise",
+  "package": "app.linewise.linewise",
+  "versionName": "1.11.0",
+  "versionCode": "12",
+  "apkSha256": "6d44419c76f5fb2110efa71295e300aff20eaf76be7d3f1b160535eb9e44558b",
+  "signerCertSha256": "674e85e5e601c18c02d75cdce16e4625b6740573593a68f3457385dc920fbb32",
+  "zipalign": "4-byte OK",
+  "signature": "apksigner verify OK",
+  "signingMode": "ephemeral",
+  "builtAt": "2026-09-24T19:32:03Z"
+}
