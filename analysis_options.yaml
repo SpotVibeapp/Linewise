@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    # Informational style hints must not block the build pipeline.
+    prefer_const_constructors: ignore
+    prefer_const_literals_to_create_immutables: ignore
+    prefer_const_declarations: ignore
+    prefer_const_constructors_in_immutables: ignore
+    sort_child_properties_last: ignore
+    use_key_in_widget_constructors: ignore
+    # `final services = this.services;` captures (context-safe before awaits).
+    unnecessary_this: ignore

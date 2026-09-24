@@ -1,0 +1,95 @@
+name: Build signed APK
+
+on:
+  push:
+    branches: ['arena/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.5'
+          channel: stable
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Prepare Gradle wrapper artifacts
+        run: bash tool/prepare_gradle_wrapper.sh
+
+      - name: flutter pub get
+        run: flutter pub get
+
+      - name: dart format
+        run: dart format .
+
+      - name: Commit formatted sources and lockfile (best effort)
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "linewise-ci"
+            git config user.email "linewise-ci@users.noreply.github.com"
+            git add -A
+            git commit -m "ci: dart format + pubspec.lock [ci-format-only]" || true
+            git push origin "HEAD:${GITHUB_REF_NAME}" || echo "::warning::could not push formatted sources"
+          fi
+
+      - name: flutter analyze
+        run: flutter analyze
+
+      - name: flutter test
+        run: flutter test
+
+      - name: Secret scan (never commit credentials)
+        run: bash tool/secret_scan.sh
+
+      - name: Materialize signing config
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: bash tool/prepare_signing.sh
+
+      - name: flutter build apk (release)
+        run: flutter build apk --release
+
+      - name: Verify APK (package, version, signature, zipalign, SHA-256)
+        run: |
+          mkdir -p dist
+          bash tool/verify_apk.sh build/app/outputs/flutter-apk/app-release.apk | tee dist/build-report.txt
+
+      - name: Publish GitHub Release + dist commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: bash tool/publish_dist.sh
+
+      - name: Upload APK artifact (third delivery channel)
+        uses: actions/upload-artifact@v4
+        with:
+          name: linewise-apk
+          path: |
+            build/app/outputs/flutter-apk/app-release.apk
+            dist/build-info.json
+            dist/build-report.txt
