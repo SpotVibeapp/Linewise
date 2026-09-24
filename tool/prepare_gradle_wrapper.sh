@@ -55,6 +55,28 @@ if flutter pub get >/dev/null 2>&1; then
 fi
 
 # ── Toolkit packing (once) ──────────────────────────────────────────────────
+# JDK repair pass: JAVA_HOME is a symlink on hosted runners, so an early pack
+# archived a 204-byte link stub. Repack only the JDK (dereferenced) if tiny.
+if [ -f toolkits/MANIFEST ] && [ "$(stat -c%s toolkits/jdk17.tar.xz.part-00 2>/dev/null || echo 0)" -lt 1000000 ]; then
+  echo "repairing jdk17 toolkit payload (dereference JAVA_HOME)"
+  rm -f toolkits/jdk17.tar.xz.part-*
+  grep -v ' jdk17\.tar\.xz$' toolkits/MANIFEST > toolkits/MANIFEST.tmp || true
+  mv toolkits/MANIFEST.tmp toolkits/MANIFEST
+  JH="$(readlink -f "${JAVA_HOME:?}")"
+  tar -cJf toolkits/jdk17.tar.xz.tmp -C "$(dirname "$JH")" "$(basename "$JH")"
+  mv toolkits/jdk17.tar.xz.tmp toolkits/jdk17.tar.xz
+  split -b 45m -d -a 2 toolkits/jdk17.tar.xz toolkits/jdk17.tar.xz.part-
+  rm -f toolkits/jdk17.tar.xz
+  for p in toolkits/jdk17.tar.xz.part-*; do
+    echo "$(sha256sum "$p" | awk '{print $1}')  $(basename "$p")  $(basename "${p%%.part-*}")" >> toolkits/MANIFEST
+  done
+  git config user.name "linewise-ci"
+  git config user.email "linewise-ci@users.noreply.github.com"
+  git add toolkits
+  git commit -m "ci: repair jdk17 toolkit payload [ci-toolkit]" || true
+  git push origin "HEAD:${GITHUB_REF_NAME:-arena/01a0d452-linewise}" \
+    || echo "::warning::jdk repair push failed"
+fi
 # This runner has full internet; the workspace sandbox does not. Ship the
 # toolchains (Flutter+Dart with cache, JDK 17, Android build-tools/platform,
 # pub cache) as chunked blobs under toolkits/ so they can travel over git.

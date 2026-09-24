@@ -49,6 +49,39 @@ extract_if android-platform-34.tar.xz    "$DEST/android-sdk/platforms/android-34
 extract_if pub-cache.tar.xz              "$DEST/pub-cache"
 extract_if gradle-8.3-bin.zip            "$DEST/_gradle_zip"
 
+# Flutter refuses to run outside a git checkout. Restore a shallow clone at the
+# revision the packed flutter_tools stamp expects (from bin/cache stamp).
+if [ -d "$DEST/flutter" ] && [ ! -d "$DEST/flutter/.git" ]; then
+  REV="$(cut -d: -f1 "$DEST/flutter/bin/cache/flutter_tools.stamp" 2>/dev/null || true)"
+  if [ -n "$REV" ]; then
+    echo "◇ restoring flutter git checkout @ $REV"
+    (cd "$DEST/flutter" && git init -q &&
+     git remote add origin https://github.com/flutter/flutter &&
+     git fetch --depth 1 origin "$REV" && git reset -q FETCH_HEAD) || true
+  fi
+fi
+
+# pub 3.5.4 crashes the flutter tool when it cannot complete its security-
+# advisories lookup (offline environments). Stripping 'advisoriesUpdated' from
+# the cached version listings makes pub skip advisories entirely (documented
+# early-return in HostedSource._getAdvisories).
+if [ -d "$DEST/pub-cache/hosted/pub.dev/.cache" ]; then
+  echo "◇ neutralizing pub advisories lookups (offline fix)"
+  DEST_CACHE="$DEST/pub-cache/hosted/pub.dev/.cache" python3 - <<'PY' || true
+import json, glob, os
+def strip(o):
+    if isinstance(o, dict):
+        o.pop('advisoriesUpdated', None)
+        for v in o.values(): strip(v)
+    elif isinstance(o, list):
+        for v in o: strip(v)
+for p in glob.glob(os.environ.get('DEST_CACHE', '') + '/*-versions.json'):
+    doc = json.load(open(p)); strip(doc); json.dump(doc, open(p, 'w'))
+for p in glob.glob(os.environ.get('DEST_CACHE', '') + '/*-advisories.json'):
+    os.remove(p)
+PY
+fi
+
 if [ -d "$DEST/_gradle_zip/gradle-8.3" ]; then
   mv "$DEST/_gradle_zip/gradle-8.3" "$DEST/gradle-8.3"
   rm -rf "$DEST/_gradle_zip"
