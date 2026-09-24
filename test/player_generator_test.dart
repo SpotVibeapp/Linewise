@@ -24,7 +24,7 @@ SubjectHistory historyWith({
   for (var i = 0; i < recYds; i++) {
     obs.add(StatObservation(
         statKey: 'rec_yds',
-        value: 40 + i,
+        value: (40 + i).toDouble(),
         gameDate: DateTime.utc(2026, 9, 1).add(Duration(days: i)),
         source: 'ESPN gamelog'));
   }

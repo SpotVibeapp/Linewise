@@ -48,7 +48,6 @@ class _PlayerSearchPageState extends State<PlayerSearchPage> {
       _status = 'Loaded-line filtering + free public search… (LOCAL/FREE — '
           '0 credits, no billable request)';
       _result = null;
-      _history = null;
       _generated = const [];
       _providerEvents = const [];
     });
