@@ -1,7 +1,0 @@
-Analyzing Linewise...                                           
-
-  error • Undefined name '_history' • lib/ui/player_search_page.dart:51:7 • undefined_identifier
-  error • Undefined name '_history' • lib/ui/player_search_page.dart:90:9 • undefined_identifier
-  error • The argument type 'int' can't be assigned to the parameter type 'double'.  • test/player_generator_test.dart:27:16 • argument_type_not_assignable
-
-3 issues found. (ran in 10.8s)
